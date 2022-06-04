@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css'
 import { Nav, Navbar as Navbarb, NavDropdown } from "react-bootstrap";
 import { initializeApp } from "firebase/app";
@@ -28,9 +28,9 @@ export default function Navbar() {
                     </Navbarb.Brand>
 
                     <Nav>
-                        <Nav.Link href="/"> Home </Nav.Link>
+                        <Nav.Link as={Link} to="/"> Home </Nav.Link>
                         <Nav.Link href="/"> Leaderboards </Nav.Link>
-                        <Nav.Link href="/user"> Profile </Nav.Link>
+                        <Nav.Link as={Link} to="/user"> Profile </Nav.Link>
                         <NavDropdown title="Settings">
                             <NavDropdown.Item href="/"> Edit Profile </NavDropdown.Item>
                             <NavDropdown.Item href="/"> Log Out </NavDropdown.Item>
