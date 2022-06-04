@@ -10,8 +10,6 @@ export default function Profile() {
 
     useEffect( () => {
         dispatch(fetchUser(80476528)) //current page id
-        setName(user.gameName);
-        setPushUp(user.pushUp);
     },[])
     return (
         <div> {user.gameName} has to do {user.pushUp} push ups.</div>
