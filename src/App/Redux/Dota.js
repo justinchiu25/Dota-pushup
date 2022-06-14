@@ -1,4 +1,5 @@
-import axios from "axios";
+//import axios from "axios";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
 const initialState = {};
 
@@ -23,7 +24,12 @@ export const setDota = (matches,recentMatch) => {
             newDeaths += element.deaths;
         })
         try {
-            const { data } = await axios.put('/api/dota', newDeaths)
+            const db = getFirestore();
+            const userRef = doc(db, "users", "80476528");
+            await updateDoc(userRef, {
+                pushUp: newDeaths,
+                recentMatch: matches[0].match_id
+            })
         } catch (err) {
             console.log(err)
         }
