@@ -14,12 +14,12 @@ const setDota_ = (dota) => {
 
 //Sets amount of deaths
 //Does not currently have a check for only WINNING games
-export const setDota = (matches,recentMatch) => {
+export const setDota = (user, matches) => {
     return async (dispatch) => {
         console.log(matches, recentMatch);
         
-        const newMatches = matches.filter( element => element.match_id > recentMatch);
-        let newDeaths = 0;
+        const newMatches = matches.filter( element => element.match_id > user.recentMatch);
+        let newDeaths = user.deaths;
         newMatches.forEach(element => {
             newDeaths += element.deaths;
         })

@@ -24,7 +24,7 @@ export default function Profile() {
     useEffect( () => {
         console.log(user);
         if(Object.keys(user).length > 0) {
-            dispatch(setDota(data, user.recentMatch))
+            dispatch(setDota(user, data))
         }
     },[data])
 
