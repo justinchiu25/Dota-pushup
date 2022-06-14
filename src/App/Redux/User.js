@@ -26,7 +26,6 @@ export const fetchUser = (userId) => {
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
-            console.log(action);
             return {...action.user};
         default:
             return state;
