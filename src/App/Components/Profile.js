@@ -12,11 +12,11 @@ export default function Profile() {
     const user = useSelector((state) => state.user);
     const { userId } = useParams()
     const dispatch = useDispatch();
-    const { data, error} = useSWR("https://api.opendota.com/api/players/80476528/recentMatches", fetcher);
+    const { data, error} = useSWR(`https://api.opendota.com/api/players/${userId}/recentMatches`, fetcher);
 
     useEffect( () => {
         dispatch(fetchUser(userId)) //current page id
-    },[])
+    },[userId])
     
     function updateInfo() {
         console.log("updating"); 

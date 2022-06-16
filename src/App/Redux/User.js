@@ -47,9 +47,7 @@ export const updateDeaths = (user, matches) => {
         try {
             const db = getFirestore();
             const userRef = doc(db, "users", user.id.toString());
-            await updateDoc(userRef, {
-                updatedValues
-            })
+            await updateDoc(userRef, updatedValues )
         } catch (err) {
             console.log(err)
         }
