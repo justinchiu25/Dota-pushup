@@ -16,16 +16,18 @@ const setDota_ = (dota) => {
 //Does not currently have a check for only WINNING games
 export const setDota = (user, matches) => {
     return async (dispatch) => {
-        console.log(matches, recentMatch);
+        console.log(matches, user);
         
         const newMatches = matches.filter( element => element.match_id > user.recentMatch);
-        let newDeaths = user.deaths;
+        console.log(newMatches);
+        let newDeaths = user.pushUp;
         newMatches.forEach(element => {
             newDeaths += element.deaths;
         })
+        console.log("pushUp", newDeaths);
         try {
             const db = getFirestore();
-            const userRef = doc(db, "users", "80476528");
+            const userRef = doc(db, "users", user.id.toString());
             await updateDoc(userRef, {
                 pushUp: newDeaths,
                 recentMatch: matches[0].match_id

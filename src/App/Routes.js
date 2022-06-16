@@ -11,7 +11,7 @@ export default function Routing() {
       <Routes>
         <Route path="/" element={<Navbar />} >
           <Route index element={<Homepage />} />
-          <Route path="user" element={<Profile />} />
+          <Route path="user/:userId" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

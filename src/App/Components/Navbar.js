@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Nav, Navbar as Navbarb, NavDropdown } from "react-bootstrap";
 import { initializeApp } from "firebase/app";
 import firebasekey from "../../firebaseKey.json"
+import { useSelector } from "react-redux";
 
 
 //MUST CHANGE THIS TO PROCESS.ENV
@@ -19,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export default function Navbar() {
+    const user = useSelector((state) => (state.user));
     return (
         <>
             <div className="Container">
@@ -30,7 +32,7 @@ export default function Navbar() {
                     <Nav>
                         <Nav.Link as={Link} to="/"> Home </Nav.Link>
                         <Nav.Link href="/"> Leaderboards </Nav.Link>
-                        <Nav.Link as={Link} to="/user"> Profile </Nav.Link>
+                        <Nav.Link as={Link} to={`/user/${user.id}`}> Profile </Nav.Link>
                         <NavDropdown title="Settings">
                             <NavDropdown.Item href="/"> Edit Profile </NavDropdown.Item>
                             <NavDropdown.Item href="/"> Log Out </NavDropdown.Item>
