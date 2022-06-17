@@ -7,7 +7,7 @@ export default function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signUp } = useAuth();
+    const { signUp, currentUser } = useAuth();
     function checkPasswordMatch(password, confirmPassword) {
       return password === confirmPassword;
     }
@@ -23,6 +23,7 @@ export default function SignUp() {
 
       try {
         await signUp(emailRef.current.value, passwordConfirmRef.current.value);
+        
       } catch (err) {
         console.log(err);
       }
