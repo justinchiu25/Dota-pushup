@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar';
 import Profile from './Components/Profile';
 import UserProfile from './Components/UserProfile';
 import SignUp from './Components/Signup';
+import Login from './Components/Login';
 import { useAuth } from "./Contexts/AuthContext";
 
 export default function Routing() {
@@ -13,15 +14,20 @@ export default function Routing() {
   return (
     <BrowserRouter>
       <Routes>
+      {currentUser !== null ? (
         <Route path="/" element={<Navbar />} >
           <Route index element={<Homepage />} />
           <Route path="user/:userId" element={<Profile />} />
           <Route path="claim" element={<UserProfile />} />
-          <Route path="*" element={<NotFound />} />
-          {currentUser === null &&
+          <Route path="*" element={<NotFound />} /> 
+        </Route> )
+        : (
+          <Route path="/" element={<Navbar />} >
             <Route path="signup" element={<SignUp />} />
-          }
-        </Route>
+            <Route path="login" element={<Login /> } />
+          </Route>
+        )
+      }
       </Routes>
     </BrowserRouter>
   )
