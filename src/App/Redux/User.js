@@ -1,4 +1,4 @@
-import { getFirestore, updateDoc, getDoc, doc } from "firebase/firestore";
+import { getFirestore, updateDoc, getDoc, doc, collection, query, where, getDocs } from "firebase/firestore";
 
 const initialState = {};
 
@@ -20,13 +20,20 @@ const updateDeaths_ = (user) => {
     }
 }
 
+
 //Retrieves userId and returns an object
 export const fetchUser = (userId) => {
     return async (dispatch) => {
+        let data = {};
         const db = getFirestore();
-        const userRef = doc(db,"users", userId.toString());
-        const userSnap = await getDoc(userRef);
-        dispatch(setUser(userSnap.data()));
+        const userRef = collection(db, "users");
+        const userIDQuery = query(userRef, where("id", "==", +userId));
+        const userSnapshot = await getDocs(userIDQuery);
+        userSnapshot.forEach((doc) => {
+            data = doc.data();
+        })
+        console.log(data);
+        dispatch(setUser(data));
     }
 }
 //Sets amount of deaths
@@ -54,6 +61,7 @@ export const updateDeaths = (user, matches) => {
         dispatch(updateDeaths_(updatedValues));
     }
 }
+
 
 export default function userReducer(state = initialState, action) {
     switch (action.type) {

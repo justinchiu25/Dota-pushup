@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css'
 import { Nav, Navbar as Navbarb, NavDropdown } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useAuth } from "../Contexts/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth } from "../Redux/Auth";
 
 export default function Navbar() {
-    const user = useSelector((state) => (state.user)); //Should be just an ID obtained at start from Login
+    const dispatch = useDispatch();
+    const authUser = useSelector((state) => state.auth);
+    const { currentUser } = useAuth();
+
+    useEffect( () => {
+        if (currentUser){
+            dispatch(setAuth(currentUser));
+        }
+    }, [currentUser])
+    
     return (
         <>
             <div className="Container">
@@ -17,7 +28,8 @@ export default function Navbar() {
                     <Nav>
                         <Nav.Link as={Link} to="/"> Home </Nav.Link>
                         <Nav.Link href="/"> Leaderboards </Nav.Link>
-                        <Nav.Link as={Link} to={`/user/80476528`}> Profile </Nav.Link>
+                        {currentUser && authUser.id ? <Nav.Link as={Link} to={`/user/${authUser.id}`}> Profile </Nav.Link> : 
+                        <Nav.Link as={Link} to={"/claim"}> Profile </Nav.Link>}
                         <NavDropdown title="Settings">
                             <NavDropdown.Item href="/"> Edit Profile </NavDropdown.Item>
                             <NavDropdown.Item href="/"> Log Out </NavDropdown.Item>
