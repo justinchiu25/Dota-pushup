@@ -27,8 +27,9 @@ export default function Profile() {
 
     return (
         <>
-        <div> {user.gameName} has to do {user.pushUp} push ups.</div>
-        <button onClick={updateInfo}> Refresh stats </button>
+            <img src={user.profileImage} />
+            <div> {user.gameName} has to do {user.pushUp} push ups.</div>
+            <button onClick={updateInfo}> Refresh stats </button>
         </>
     )
 }
