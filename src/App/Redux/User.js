@@ -1,10 +1,10 @@
-import { getFirestore, updateDoc, getDoc, doc, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 const initialState = {};
 
 //Actions
 const SET_USER = "SET_USER";
-const UPDATE_DEATHS = "UPDATE_DEATHS";
+const UPDATE_USER = "UPDATE_USER";
 
 const setUser = (user) => {
     return {
@@ -13,9 +13,9 @@ const setUser = (user) => {
     }
 }
 
-const updateDeaths_ = (user) => {
+const updateUser_ = (user) => {
     return {
-        type: UPDATE_DEATHS,
+        type: UPDATE_USER,
         user
     }
 }
@@ -36,29 +36,29 @@ export const fetchUser = (userId) => {
         dispatch(setUser(data));
     }
 }
-//Sets amount of deaths
-export const updateDeaths = (user, matches) => {
+//Updates user documents
+export const updateUser = (user, matches) => {
     return async (dispatch) => {
-        console.log(matches, user);
         
         const newMatches = matches.filter( element => element.match_id > user.recentMatch);
         let newDeaths = user.pushUp;
         newMatches.forEach(element => {
             newDeaths += element.deaths;
         })
-        console.log("pushUp", newDeaths);
         const updatedValues = {
             pushUp: newDeaths,
             recentMatch: matches[0].match_id
         }
         try {
             const db = getFirestore();
-            const userRef = doc(db, "users", user.id.toString());
-            await updateDoc(userRef, updatedValues )
+            const userRef = collection(db, "users");
+            const userIDQuery = query(userRef, where("id", "==", +user.id));
+            const userSnapshot = await getDocs(userIDQuery);
+            await updateDoc(userSnapshot.docs[0].ref, updatedValues);
         } catch (err) {
             console.log(err)
         }
-        dispatch(updateDeaths_(updatedValues));
+        dispatch(updateUser_(updatedValues));
     }
 }
 
@@ -67,7 +67,7 @@ export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
             return {...action.user};
-        case UPDATE_DEATHS:
+        case UPDATE_USER:
             return {...state, pushUp: action.user.pushUp, recentMatch: action.user.recentMatch }
         default:
             return state;
