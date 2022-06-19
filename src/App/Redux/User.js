@@ -5,6 +5,7 @@ const initialState = {};
 //Actions
 const SET_USER = "SET_USER";
 const UPDATE_USER = "UPDATE_USER";
+const UPDATE_USER_PUSHUP = "UPDATE_USER_PUSHUP";
 
 const setUser = (user) => {
     return {
@@ -20,6 +21,12 @@ const updateUser_ = (user) => {
     }
 }
 
+const updateUserCompletedPushUp_ = (user) => {
+    return {
+        type: UPDATE_USER_PUSHUP,
+        user
+    }
+}
 
 //Retrieves userId and returns an object
 export const fetchUser = (userId) => {
@@ -35,7 +42,7 @@ export const fetchUser = (userId) => {
         dispatch(setUser(data));
     }
 }
-//Updates user documents
+//Updates user deaths from api
 export const updateUser = (user, matches) => {
     return async (dispatch) => {
         
@@ -61,13 +68,35 @@ export const updateUser = (user, matches) => {
     }
 }
 
+//Updates user completed pushup
+export const updateUserCompletedPushUp = (user, pushUpInput) => {
+    return async (dispatch) => {
+        const updatedValues = {
+            pushUp: user.pushUp - pushUpInput,
+            completed: user.completed + pushUpInput
+        }
+        try {
+            const db = getFirestore();
+            const userRef = collection(db, "users");
+            const userIDQuery = query(userRef, where("id", "==", +user.id));
+            const userSnapshot = await getDocs(userIDQuery);
+            await updateDoc(userSnapshot.docs[0].ref, updatedValues);
+        } catch (err) {
+            console.log(err)
+        }
+
+        dispatch(updateUserCompletedPushUp_(updatedValues))
+    }
+}
 
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
             return {...action.user};
         case UPDATE_USER:
-            return {...state, pushUp: action.user.pushUp, recentMatch: action.user.recentMatch }
+            return {...state, pushUp: action.user.pushUp, recentMatch: action.user.recentMatch}
+        case UPDATE_USER_PUSHUP:
+            return {...state, pushUp: action.user.pushUp, completed: action.user.completed}
         default:
             return state;
     }
