@@ -32,7 +32,6 @@ export const fetchUser = (userId) => {
         userSnapshot.forEach((doc) => {
             data = doc.data();
         })
-        console.log(data);
         dispatch(setUser(data));
     }
 }

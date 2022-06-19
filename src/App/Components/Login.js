@@ -10,7 +10,6 @@ export default function Login() {
 
     async function handleSubmit(evt) {
       evt.preventDefault();
-      console.log("Username: ", emailRef.current.value , " Password: ", passwordRef.current.value); 
 
       try {
         await login(emailRef.current.value, passwordRef.current.value);
@@ -28,7 +27,7 @@ export default function Login() {
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             <div className="card">
               <div className="card-body p-5">
-                <h2 className="text-uppercase text-center mb-5">Login your account</h2>
+                <h2 className="text-uppercase text-center mb-5">Login to your account</h2>
   
                 <form onSubmit={handleSubmit}>
 

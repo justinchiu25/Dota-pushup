@@ -19,7 +19,6 @@ export default function Profile() {
     },[userId, dispatch])
     
     function updateInfo() {
-        console.log("updating"); 
         if(Object.keys(user).length > 0) {
             dispatch(updateUser(user, data))
         }

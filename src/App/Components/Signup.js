@@ -14,7 +14,6 @@ export default function SignUp() {
 
     async function handleSubmit(evt) {
       evt.preventDefault();
-      console.log("Username: ", emailRef.current.value , " Password: ", passwordRef.current.value, " Confirm: ", passwordConfirmRef.current.value);
       
       if (!checkPasswordMatch(passwordRef.current.value, passwordConfirmRef.current.value)) {
           console.log("Set error here");
