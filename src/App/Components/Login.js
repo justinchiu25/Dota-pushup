@@ -1,11 +1,13 @@
 import react, { useRef } from "react";
 import { Nav } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { login } = useAuth();
+    const navigate = useNavigate();
 
 
     async function handleSubmit(evt) {
@@ -13,7 +15,7 @@ export default function Login() {
 
       try {
         await login(emailRef.current.value, passwordRef.current.value);
-        
+        navigate("/");
       } catch (err) {
         console.log(err);
       }

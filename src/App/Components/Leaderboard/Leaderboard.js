@@ -13,7 +13,7 @@ export default function Leaderboard() {
     },[dispatch,variable])
     return (
         <>
-        <table class="table table-dark table-striped">
+        <table className="table table-dark table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -24,7 +24,7 @@ export default function Leaderboard() {
             </thead>
             <tbody>
                 {leaderboards.map((element,index) => {
-                    return <LeaderboardUser user={element} index={index} />
+                    return <LeaderboardUser key={index} user={element} index={index} />
                 })}
             </tbody>
         </table>

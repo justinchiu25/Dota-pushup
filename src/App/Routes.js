@@ -15,13 +15,16 @@ export default function Routing() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/" element={<Navbar />} >
+          <Route index element={<Homepage />} />
+          <Route path="leaderboard" element={<Leaderboard />} />
+          <Route path="*" element={<NotFound />} /> 
+        </Route>
       {currentUser !== null ? (
         <Route path="/" element={<Navbar />} >
           <Route index element={<Homepage />} />
           <Route path="user/:userId" element={<Profile />} />
           <Route path="claim" element={<UserProfile />} />
-          <Route path="leaderboard" element={<Leaderboard />} />
-          <Route path="*" element={<NotFound />} /> 
         </Route> )
         : (
           <Route path="/" element={<Navbar />} >
