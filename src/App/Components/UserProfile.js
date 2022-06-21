@@ -10,8 +10,6 @@ export default function UserProfile() {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-
-        console.log(steamId.current.value, currentUser.uid);
         dispatch(addUser(currentUser.uid,steamId.current.value));
     }
     return (
