@@ -7,7 +7,7 @@ import Profile from './Components/Profile';
 import UserProfile from './Components/UserProfile';
 import SignUp from './Components/Signup';
 import Login from './Components/Login';
-import Leaderboard from './Components/Leaderboard';
+import Leaderboard from './Components/Leaderboard/Leaderboard';
 import { useAuth } from "./Contexts/AuthContext";
 
 export default function Routing() {

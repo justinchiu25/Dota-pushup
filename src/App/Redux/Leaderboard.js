@@ -15,7 +15,7 @@ export const setLeaderboard = (type) => {
     return async (dispatch) => {
         const db = getFirestore();
         const userRef = collection(db, "users");
-        const userIDQuery = query(userRef, orderBy("pushUp","desc"), limit(25));
+        const userIDQuery = query(userRef, orderBy(type,"desc"), limit(25));
         const userSnapshot = await getDocs(userIDQuery);
         const sortedLeaderboard = [];
         userSnapshot.forEach((docs) => {
