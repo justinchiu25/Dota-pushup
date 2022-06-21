@@ -38,7 +38,7 @@ export default function Navbar() {
 
                     <Nav>
                         <Nav.Link as={Link} to="/"> Home </Nav.Link>
-                        <Nav.Link href="/"> Leaderboards </Nav.Link>
+                        <Nav.Link as={Link} to="/leaderboard"> Leaderboards </Nav.Link>
                         {currentUser && authUser.id ? <Nav.Link as={Link} to={`/user/${authUser.id}`}> Profile </Nav.Link> : 
                         <Nav.Link as={Link} to={"/claim"}> Profile </Nav.Link>}
                         <NavDropdown title="Settings">

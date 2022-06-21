@@ -7,6 +7,7 @@ import Profile from './Components/Profile';
 import UserProfile from './Components/UserProfile';
 import SignUp from './Components/Signup';
 import Login from './Components/Login';
+import Leaderboard from './Components/Leaderboard';
 import { useAuth } from "./Contexts/AuthContext";
 
 export default function Routing() {
@@ -19,6 +20,7 @@ export default function Routing() {
           <Route index element={<Homepage />} />
           <Route path="user/:userId" element={<Profile />} />
           <Route path="claim" element={<UserProfile />} />
+          <Route path="leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<NotFound />} /> 
         </Route> )
         : (
