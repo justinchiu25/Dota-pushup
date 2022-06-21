@@ -40,11 +40,15 @@ export default function Navbar() {
                         <Nav.Link as={Link} to="/"> Home </Nav.Link>
                         <Nav.Link as={Link} to="/leaderboard"> Leaderboards </Nav.Link>
                         {currentUser && authUser.id ? <Nav.Link as={Link} to={`/user/${authUser.id}`}> Profile </Nav.Link> : 
-                        <Nav.Link as={Link} to={"/claim"}> Profile </Nav.Link>}
-                        <NavDropdown title="Settings">
-                            <NavDropdown.Item href="/"> Edit Profile </NavDropdown.Item>
-                            <NavDropdown.Item onClick={handleLogout} href="/"> Log Out </NavDropdown.Item>
+                        currentUser ?
+                        <Nav.Link as={Link} to={"/claim"}> Profile </Nav.Link> :
+                        <Nav.Link as={Link} to={"/login"}> Profile </Nav.Link>}
+                        <NavDropdown title="Useless Settings">
+                            <NavDropdown.Item href="/"> Homepage </NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleLogout}> Log Out </NavDropdown.Item>
                         </NavDropdown>
+                        {currentUser ? <Nav.Link onClick={handleLogout}> Log Out</Nav.Link> :
+                        <Nav.Link as={Link} to={"/login"}> Login </Nav.Link>} 
                     </Nav>
                 </Navbarb>
             </div>

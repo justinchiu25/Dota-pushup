@@ -1,6 +1,6 @@
 import react, { useRef } from "react";
 import { Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
 export default function SignUp() {
@@ -8,6 +8,8 @@ export default function SignUp() {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const { signUp } = useAuth();
+    const navigate = useNavigate();
+
     function checkPasswordMatch(password, confirmPassword) {
       return password === confirmPassword;
     }
@@ -22,7 +24,7 @@ export default function SignUp() {
 
       try {
         await signUp(emailRef.current.value, passwordConfirmRef.current.value);
-        
+        navigate("/")
       } catch (err) {
         console.log(err);
       }

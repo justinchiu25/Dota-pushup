@@ -1,7 +1,6 @@
 import react from "react";
 
-export default function LeaderboardUser( { user, index } ) {
-
+export default function LeaderboardUser( { user, index}) {
     return (
         <tr>
             <th scope="row"> {index+1} </th>
