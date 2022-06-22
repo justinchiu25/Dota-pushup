@@ -6,6 +6,7 @@ const initialState = {};
 const ADD_USER = "ADD_USER";
 const SET_AUTH = "SET_AUTH";
 
+
 const addUser_ = (user) => {
     return {
         type: ADD_USER,
@@ -29,7 +30,7 @@ export const addUser = (userId, steamId) => {
             const userIDQuery = query(userRef, where("id", "==", +steamId));
             const userSnapshot = await getDocs(userIDQuery);
             if (userSnapshot.docs.length !== 0) {
-                throw "User already exists"
+                throw new Error("User already exists");
             }
         } catch (err) {
             return (err);

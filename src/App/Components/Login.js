@@ -1,6 +1,6 @@
 import react, { useRef } from "react";
 import { Nav } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
 export default function Login() {
@@ -47,7 +47,9 @@ export default function Login() {
                     <button type="submit"
                       className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                   </div>
-  
+
+                  <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Nav.Link as={Link} to="/signup" 
+                      className="fw-bold text-body"><u>Sign up here</u></Nav.Link></p>
                 </form>
   
               </div>

@@ -1,5 +1,5 @@
 import react, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import { addUser } from "../Redux/Auth";
@@ -16,8 +16,9 @@ export default function UserProfile() {
         const userExist = await dispatch(addUser(currentUser.uid,steamId.current.value)); //dispatch returns undefined if no error
         if (!userExist) {
             navigate(`/user/${steamId.current.value}`)
+        } else {
+            setError(userExist.message)
         }
-        setError(userExist)
     }
     return (
         <div>
