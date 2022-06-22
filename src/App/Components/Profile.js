@@ -27,12 +27,14 @@ export default function Profile() {
     }
 
     return (
-        <>
-            <img src={user.profileImage} alt="profile" />
-            <div> {user.gameName} has to do {user.pushUp} push ups.</div>
-            <div> Has completed {user.completed} push ups.</div>
-            <button onClick={updateInfo}> Refresh stats </button>
-            {auth.id === +userId && <ProfileInput user={user} /> }
-        </>
+        <section>
+            <div className="bg-dark" style={{position: "relative"}}>
+                <img src={user.profileImage} alt="profile" />
+                <div className="text-white"> {user.gameName} has to do {user.pushUp} push ups.</div>
+                <div className="text-white"> Has completed {user.completed} push ups.</div>
+                <button className="refreshButton" onClick={updateInfo}> Refresh stats </button>
+                {auth.id === +userId && <ProfileInput user={user} /> }
+            </div>
+        </section>
     )
 }
