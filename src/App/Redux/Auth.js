@@ -5,7 +5,6 @@ const initialState = {};
 
 const ADD_USER = "ADD_USER";
 const SET_AUTH = "SET_AUTH";
-const SET_ERROR = "SET_ERROR";
 
 const addUser_ = (user) => {
     return {
