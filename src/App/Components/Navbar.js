@@ -52,6 +52,9 @@ export default function Navbar() {
                     </Nav>
                 </Navbarb>
             </div>
+            <footer className= "bg-dark footerText p-3">
+                Dota Push Ups
+            </footer>
 
             <Outlet /> {/*Outlet important to render children*/} 
         </>

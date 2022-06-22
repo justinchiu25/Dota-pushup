@@ -21,7 +21,8 @@ export default function ProfileInput( { user } ) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label> How many push ups </label>
+            <label className="text-white"> How many push ups completed </label>
+            <> </>
             <input type="text" ref={pushUpRef} />
             <button type="submit"> Submit </button>
         </form>
