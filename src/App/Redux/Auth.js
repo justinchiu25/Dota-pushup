@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, getDocs, where, collection, query} from "firebase/firestore";
 
 const initialState = {};
 
@@ -20,11 +20,21 @@ const setAuth_ = (user) => {
     }
 }
 
-
 //Adds to database
 export const addUser = (userId, steamId) => {
     return async (dispatch) => {
-        
+        const db = getFirestore();
+        try {
+            const userRef = collection(db, "users");
+            const userIDQuery = query(userRef, where("id", "==", +steamId));
+            const userSnapshot = await getDocs(userIDQuery);
+            if (userSnapshot.docs.length !== 0) {
+                throw "User already exists"
+            }
+        } catch (err) {
+            return (err);
+        }
+
         const { data } = await axios.get(`https://api.opendota.com/api/players/${steamId}`)
         const recentGame = await axios.get(`https://api.opendota.com/api/players/${steamId}/recentMatches`);
         const userInfo = {
@@ -36,9 +46,8 @@ export const addUser = (userId, steamId) => {
             profileImage: data.profile.avatarfull
         }
         try {            
-            const db = getFirestore();
             const userRef = doc(db, "users", userId.toString());
-            await setDoc(userRef, userInfo)
+            await setDoc(userRef, userInfo);
         } catch (err) {
             console.log(err);
         }

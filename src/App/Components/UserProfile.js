@@ -1,21 +1,33 @@
-import react, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import react, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import { addUser } from "../Redux/Auth";
 
 export default function UserProfile() {
     const steamId = useRef();
     const dispatch = useDispatch();
+    const [error, setError] = useState();
     const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        dispatch(addUser(currentUser.uid,steamId.current.value));
+        const userExist = await dispatch(addUser(currentUser.uid,steamId.current.value)); //dispatch returns undefined if no error
+        if (!userExist) {
+            navigate(`/user/${steamId.current.value}`)
+        }
+        setError(userExist)
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" ref={steamId} />
-            <button type="submit"> Submit </button>
-        </form>
+        <div>
+            {error && <div> {error} </div>}
+            <form onSubmit={handleSubmit}>
+                <label> Enter your steam id: </label>
+                <></>
+                <input type="text" ref={steamId} />
+                <button type="submit"> Submit </button>
+            </form>
+        </div>
     )
 }
