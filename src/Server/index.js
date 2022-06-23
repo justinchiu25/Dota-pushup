@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const app = express()
+const schedule = require('node-schedule');
+const polling = require('./Firebase/UpdateUsers');
 
 // logging middleware
 
@@ -25,6 +27,14 @@ const PORT = 4000;
 const init = () => {
     app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 }
+
+const rule = new schedule.RecurrenceRule();
+rule.hour = 0;
+rule.tz = "America/New_York";
+
+schedule.scheduleJob(rule, async () => {
+  await polling();
+})
 
 init();
 module.exports = app

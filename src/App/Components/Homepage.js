@@ -1,8 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 export default function Homepage() {
 
     return (
-        <div> Hello Homepage</div>
+        <div> This is the homepage! WOW! </div>
     )
 }
