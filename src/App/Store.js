@@ -5,11 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./Redux/User";
 import authReducer from "./Redux/Auth";
 import leaderboardReducer from "./Redux/Leaderboard";
+import pollingReducer from "./Redux/Polling";
 
 const reducer = combineReducers({
   user: userReducer,
   auth: authReducer,
-  leaderboard: leaderboardReducer
+  leaderboard: leaderboardReducer,
+  polling: pollingReducer
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
