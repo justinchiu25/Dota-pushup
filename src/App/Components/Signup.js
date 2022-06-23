@@ -1,4 +1,4 @@
-import react, { useRef } from "react";
+import react, { useRef, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
@@ -9,6 +9,7 @@ export default function SignUp() {
     const passwordConfirmRef = useRef();
     const { signUp } = useAuth();
     const navigate = useNavigate();
+    const [error,setError] = useState();
 
     function checkPasswordMatch(password, confirmPassword) {
       return password === confirmPassword;
@@ -18,15 +19,15 @@ export default function SignUp() {
       evt.preventDefault();
       
       if (!checkPasswordMatch(passwordRef.current.value, passwordConfirmRef.current.value)) {
-          console.log("Set error here");
-          return;
+          return setError("Passwords do not match");
       }
 
       try {
+        setError("");
         await signUp(emailRef.current.value, passwordConfirmRef.current.value);
         navigate("/")
       } catch (err) {
-        console.log(err);
+        setError(errorHandler(err));
       }
     }
 
@@ -39,7 +40,8 @@ export default function SignUp() {
             <div className="card">
               <div className="card-body p-5">
                 <h2 className="text-uppercase text-center mb-5">Create an account</h2>
-  
+
+                {error && <div className="alert alert-primary" role="alert"> {error} </div>}
                 <form onSubmit={handleSubmit}>
 
                   <div className="form-outline mb-4">
@@ -74,4 +76,23 @@ export default function SignUp() {
       </div>
     </div>
   </section>)
+}
+
+function errorHandler(error) {
+  let status = error;
+  switch (error.code) {
+    case "auth/email-already-in-use":
+      status = "Email is already in use";
+      break;
+    case "auth/weak-password":
+      status = "Password should be at least 6 characters"
+      break;
+    case "auth/invalid-email":
+      status = "Must be a valid email"
+      break;
+    default:
+      status = "Network Error";
+      break;
+  }
+  return status;
 }

@@ -43,10 +43,11 @@ export default function Navbar() {
                         currentUser ?
                         <Nav.Link as={Link} to={"/claim"}> Profile </Nav.Link> :
                         <Nav.Link as={Link} to={"/login"}> Profile </Nav.Link>}
+                        {currentUser &&
                         <NavDropdown title="Useless Settings">
                             <NavDropdown.Item href="/"> Homepage </NavDropdown.Item>
                             <NavDropdown.Item onClick={handleLogout}> Log Out </NavDropdown.Item>
-                        </NavDropdown>
+                        </NavDropdown> }
                         {currentUser ? <Nav.Link onClick={handleLogout}> Log Out</Nav.Link> :
                         <Nav.Link as={Link} to={"/login"}> Login </Nav.Link>} 
                     </Nav>

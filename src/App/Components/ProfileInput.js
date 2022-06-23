@@ -9,11 +9,12 @@ export default function ProfileInput( { user } ) {
     function handleSubmit(evt) {
         evt.preventDefault();
         const pushUpValue = Math.floor(+pushUpRef.current.value)
+        setError("");
         if (!isNaN(pushUpValue) && pushUpValue > 0 && pushUpValue <= user.pushUp){
             dispatch(updateUserCompletedPushUp(user,pushUpValue))
             evt.target.reset();
         } else {
-            console.log("Please enter valid (Set error here)");
+            setError("Please enter a valid number");
         }
 
 
@@ -21,6 +22,7 @@ export default function ProfileInput( { user } ) {
 
     return (
         <form onSubmit={handleSubmit}>
+            {error && <div className="alert alert-primary" role="alert"> {error} </div>}
             <label className="text-white"> How many push ups completed </label>
             <> </>
             <input type="text" ref={pushUpRef} />
