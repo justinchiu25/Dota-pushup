@@ -1,4 +1,4 @@
-import react, { useRef } from "react";
+import react, { useRef, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
@@ -8,16 +8,17 @@ export default function Login() {
     const passwordRef = useRef();
     const { login } = useAuth();
     const navigate = useNavigate();
-
+    const [error,setError] = useState();
 
     async function handleSubmit(evt) {
       evt.preventDefault();
 
       try {
+        setError('');
         await login(emailRef.current.value, passwordRef.current.value);
         navigate("/");
       } catch (err) {
-        console.log(err);
+        setError("Invalid email/password");
       }
     }
 
@@ -30,7 +31,8 @@ export default function Login() {
             <div className="card">
               <div className="card-body p-5">
                 <h2 className="text-uppercase text-center mb-5">Login to your account</h2>
-  
+
+                {error && <div className="alert alert-primary" role="alert"> {error} </div>}
                 <form onSubmit={handleSubmit}>
 
                   <div className="form-outline mb-4">
