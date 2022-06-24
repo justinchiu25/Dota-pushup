@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLeaderboard } from "../../Redux/Leaderboard";
 import LeaderboardUser from "./LeaderboardUser";

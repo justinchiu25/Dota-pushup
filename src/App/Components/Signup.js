@@ -1,4 +1,4 @@
-import react, { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
