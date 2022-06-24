@@ -1,16 +1,14 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-const firebasekey = require("./firebaseKey.json")
 
-//MUST CHANGE THIS TO PROCESS.ENV
 const firebaseConfig = {
-    apiKey: firebasekey.firebase_apiKey,
-    authDomain: firebasekey.firebase_authDomain,
-    projectId: firebasekey.firebase_projectId,
-    storageBucket: firebasekey.firebase_storageBucket,
-    messagingSenderId: firebasekey.firebase_messagingSenderId,
-    appId: firebasekey.firebase_appId,
+    apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+    authDomain: process.env.REACTAPP_FIREBASE_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGESENDERID,
+    appId: process.env.REACT_APP_FIREBASE_APPID
 }
     
 const app = firebase.initializeApp(firebaseConfig);

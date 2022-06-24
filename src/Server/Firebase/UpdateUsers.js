@@ -1,16 +1,15 @@
 const firebase = require('firebase/compat/app');
 require('firebase/compat/auth');
 require('firebase/compat/firestore');
-const firebasekey = require("../../firebaseKey.json");
 const { getFirestore, updateDoc, collection, getDocs } = require("firebase/firestore");
 
 const firebaseConfig = {
-    apiKey: firebasekey.firebase_apiKey,
-    authDomain: firebasekey.firebase_authDomain,
-    projectId: firebasekey.firebase_projectId,
-    storageBucket: firebasekey.firebase_storageBucket,
-    messagingSenderId: firebasekey.firebase_messagingSenderId,
-    appId: firebasekey.firebase_appId,
+    apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+    authDomain: process.env.REACTAPP_FIREBASE_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGESENDERID,
+    appId: process.env.REACT_APP_FIREBASE_APPID
 }
     
 const app = firebase.initializeApp(firebaseConfig);
