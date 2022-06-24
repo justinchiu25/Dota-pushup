@@ -2,6 +2,7 @@ const firebase = require('firebase/compat/app');
 require('firebase/compat/auth');
 require('firebase/compat/firestore');
 const { getFirestore, updateDoc, collection, getDocs } = require("firebase/firestore");
+require("dotenv").config();
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
