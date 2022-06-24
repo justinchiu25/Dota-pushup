@@ -24,8 +24,8 @@ export default function UserProfile() {
         <div>
             {error && <div> {error} </div>}
             <form onSubmit={handleSubmit}>
-                <label> Enter your steam id: </label>
-                <></>
+                <label> Enter your steam32 id: (https://www.opendota.com/players/XXXXXXX) </label>
+                <> </>
                 <input type="text" ref={steamId} />
                 <button type="submit"> Submit </button>
             </form>
