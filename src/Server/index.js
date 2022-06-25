@@ -30,6 +30,7 @@ const init = () => {
 
 const rule = new schedule.RecurrenceRule();
 rule.hour = 0;
+rule.minute = 0;
 rule.tz = "America/New_York";
 
 schedule.scheduleJob(rule, async () => {
