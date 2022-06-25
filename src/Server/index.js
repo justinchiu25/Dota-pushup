@@ -30,10 +30,11 @@ const init = () => {
 
 const rule = new schedule.RecurrenceRule();
 rule.hour = 1;
-rule.minute = 0;
+rule.minute = 45;
 rule.tz = "America/New_York";
 
 schedule.scheduleJob(rule, async () => {
+  console.log("Polling");
   await polling();
 })
 
