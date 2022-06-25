@@ -21,9 +21,9 @@ export default function ProfileInput( { user } ) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{textAlign: "center"}}>
             {error && <div className="alert alert-primary" role="alert"> {error} </div>}
-            <label className="text-white"> How many push ups completed </label>
+            <label className="text-white"> Completed Push Ups:  </label>
             <> </>
             <input type="text" ref={pushUpRef} />
             <button type="submit"> Submit </button>

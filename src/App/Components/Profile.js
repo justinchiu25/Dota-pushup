@@ -27,14 +27,27 @@ export default function Profile() {
     }
 
     return (
-        <section>
-            <div className="bg-dark" style={{position: "relative"}}>
-                <img src={user.profileImage} alt="profile" />
-                <div className="text-white"> {user.gameName} has to do {user.pushUp} push ups.</div>
-                <div className="text-white"> Has completed {user.completed} push ups.</div>
-                <button className="refreshButton" onClick={updateInfo}> Refresh stats </button>
-                {auth.id === +userId && <ProfileInput user={user} /> }
-            </div>
-        </section>
+        <div className="bg-dark" style={{height: "100vh", width: "100vw"}}>
+            <section>
+                <div className="bg-dark" style={{position: "relative"}}>
+                    <h1 className="text-white" style={{textAlign: "center"}}> {user.gameName} </h1>
+                    <div className="row"> 
+                        <div className="col">
+                            <div style={{textAlign: "center"}}>
+                                <img src={user.profileImage} alt="profile" style={{maxHeight: "150px", maxWidth: "150px", justifyContent: "center"}} />
+                            </div>
+                        </div>
+                        <div className="col-6 d-flex align-items-center">
+                            <div>
+                                <div className="text-white"> {user.gameName} has to do {user.pushUp} push ups.</div> 
+                                <div className="text-white"> Has completed a total of {user.completed} push ups.</div>
+                            </div>
+                        </div>
+                        <button className="col-sm" style={{maxHeight: "75px", maxWidth: "100px", marginRight: "50px"}} onClick={updateInfo}> Refresh stats </button>
+                        {auth.id === +userId && <ProfileInput user={user}/> }           
+                    </div>
+                </div>
+            </section>
+        </div>
     )
 }
