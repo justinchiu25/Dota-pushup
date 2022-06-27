@@ -18,12 +18,12 @@ export default function Routing() {
       <Route path="/" element={<Navbar />} >
           <Route index element={<Homepage />} />
           <Route path="leaderboard" element={<Leaderboard />} />
+          <Route path="user/:userId" element={<Profile />} />
           <Route path="*" element={<NotFound />} /> 
         </Route>
       {currentUser !== null ? (
         <Route path="/" element={<Navbar />} >
           <Route index element={<Homepage />} />
-          <Route path="user/:userId" element={<Profile />} />
           <Route path="claim" element={<UserProfile />} />
         </Route> )
         : (
