@@ -12,24 +12,24 @@ export default function Leaderboard() {
         dispatch(setLeaderboard(variable));
     },[dispatch,variable])
     return (
-        <>
-        <table className="table table-dark table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Push Ups</th>
-                    <th scope="col">Completed</th>
-                </tr>
-            </thead>
-            <tbody>
-                {leaderboards.map((element,index) => {
-                    return <LeaderboardUser key={index} user={element} index={index} />
-                })}
-            </tbody>
-        </table>
-        <button onClick={() => setVariable("pushUp")}> Push Up </button>
-        <button onClick={() => setVariable("completed")}> Completed </button>
-        </>
+        <div className="bg-dark" style={{height: "100vh", width: "100vw"}}>
+            <table className="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Push Ups</th>
+                        <th scope="col">Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {leaderboards.map((element,index) => {
+                        return <LeaderboardUser key={index} user={element} index={index} />
+                    })}
+                </tbody>
+            </table>
+            <button onClick={() => setVariable("pushUp")}> Push Up </button>
+            <button onClick={() => setVariable("completed")}> Completed </button>
+        </div>
     )
 }
