@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, Link, useNavigate} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css'
-import { Nav, Navbar as Navbarb, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar as Navbarb } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../Redux/Auth";
