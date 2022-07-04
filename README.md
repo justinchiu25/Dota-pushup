@@ -39,6 +39,7 @@ Profile
 ![profile](https://user-images.githubusercontent.com/54900863/176327481-d5aa0767-f722-4cab-b1df-eddaac220789.png)
 
 ## To-do
+- Refine look
 
 ## Contact
 [Justin Chiu](https://linkedin.com/in/justinchiu25)
